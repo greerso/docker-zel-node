@@ -53,11 +53,11 @@ fi
 # Fix ownership of the created files/folders
 chown -R user:user /home/user /mnt/zelcash
 
-/usr/local/bin/gosu user zelcash-fetch-params.sh
+/usr/sbin/gosu user /usr/local/bin/zelcash-fetch-params.sh
 
 echo "Starting $@ .."
 if [[ "$1" == zend ]]; then
-    exec /usr/local/bin/gosu user /bin/bash -c "$@ $OPTS"
+    exec /usr/sbin/gosu user /bin/bash -c "$@ $OPTS"
 fi
 
-exec /usr/local/bin/gosu user "$@"
+exec /usr/sbin/gosu user "$@"
