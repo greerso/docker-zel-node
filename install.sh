@@ -136,25 +136,25 @@ Requires=docker.service
 [Service]
 TimeoutStartSec=10m
 Restart=always
-ExecStartPre=-/usr/bin/docker stop zel-node
-ExecStartPre=-/usr/bin/docker rm  zel-node
+ExecStartPre=-/usr/bin/docker stop zelcashd
+ExecStartPre=-/usr/bin/docker rm  zelcashd
 # Always pull the latest docker image
 ExecStartPre=/usr/bin/docker pull greerso/zelcashd:latest
-ExecStart=/usr/bin/docker run --rm --net=host -p 16125:16125 -p 16124:16124 -v /mnt/zelcash:/mnt/zelcash --name zel-node greerso/zelcashd:latest
+ExecStart=/usr/bin/docker run --rm --net=host -p 16125:16125 -p 16124:16124 -v /mnt/zelcash:/mnt/zelcash --name zelcashd greerso/zelcashd:latest
 [Install]
-WantedBy=multi-user.target" | tee /etc/systemd/system/zel-node.service
+WantedBy=multi-user.target" | tee /etc/systemd/system/zelcashd.service
 }
 
 startcontainers() {
   print_status "Enabling and starting container services..."
   systemctl daemon-reload
-  systemctl enable zel-node
-  systemctl restart zel-node
+  systemctl enable zelcashd
+  systemctl restart zelcashd
 }
 
 zelalias() {
   if ! grep -q "alias zelcash-cli" ~/.aliases ; then
-    echo -e "alias zelcash-cli=\"docker exec -it zel-node /usr/local/bin/gosu user zelcash-cli\"" | tee -a ~/.aliases
+    echo -e "alias zelcash-cli=\"docker exec -it zelcashd /usr/local/bin/gosu user zelcash-cli\"" | tee -a ~/.aliases
   fi
   
   if ! grep -q ". ~/.aliases" ~/.bashrc ; then
@@ -170,7 +170,7 @@ zelalias() {
 
 fetchparams() {
   print_status "Waiting for node to fetch params ..."
-  until docker exec -it zel-node /usr/local/bin/gosu user zelcash-cli getinfo
+  until docker exec -it zelcashd /usr/local/bin/gosu user zelcash-cli getinfo
   do
     echo -e ".."
     sleep 30
