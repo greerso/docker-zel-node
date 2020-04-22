@@ -122,7 +122,7 @@ addnode=explorer.zel.cash
 addnode=explorer2.zel.cash
 addnode=explorer.zel.zelcore.io
 addnode=blockbook.zel.network
-maxconnections=256" | tee /mnt/zen/config/zelcash.conf
+maxconnections=256" | tee /mnt/zelcash/config/zelcash.conf
 }
 
 zelcashdservice() {
