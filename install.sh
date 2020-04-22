@@ -8,7 +8,7 @@ print_status() {
     echo -e
 }
 
-if [ $# -lt 4 ]; then
+if [ $# -lt 3 ]; then
     echo -e "Execution format ./install.sh zelnode_pubkey collateral_txid tx_output_index nodetype"
     exit
 fi
@@ -130,20 +130,20 @@ zelcashdservice() {
   print_status "Installing zelcash service..."
   echo -e \ 
   "[Unit]
-  Description=ZeCash Daemon Container
-  After=docker.service
-  Requires=docker.service
+Description=ZeCash Daemon Container
+After=docker.service
+Requires=docker.service
 
-  [Service]
-  TimeoutStartSec=10m
-  Restart=always
-  ExecStartPre=-/usr/bin/docker stop zel-node
-  ExecStartPre=-/usr/bin/docker rm  zel-node
-  # Always pull the latest docker image
-  ExecStartPre=/usr/bin/docker pull greerso/zelcashd:latest
-  ExecStart=/usr/bin/docker run --rm --net=host -p 16125:16125 -p 16124:16124 -v /mnt/zelcash:/mnt/zelcash --name zel-node greerso/zelcashd:latest
-  [Install]
-  WantedBy=multi-user.target" | tee /etc/systemd/system/zel-node.service
+[Service]
+TimeoutStartSec=10m
+Restart=always
+ExecStartPre=-/usr/bin/docker stop zel-node
+ExecStartPre=-/usr/bin/docker rm  zel-node
+# Always pull the latest docker image
+ExecStartPre=/usr/bin/docker pull greerso/zelcashd:latest
+ExecStart=/usr/bin/docker run --rm --net=host -p 16125:16125 -p 16124:16124 -v /mnt/zelcash:/mnt/zelcash --name zel-node greerso/zelcashd:latest
+[Install]
+WantedBy=multi-user.target" | tee /etc/systemd/system/zel-node.service
 }
 
 startcontainers() {
