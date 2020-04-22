@@ -103,8 +103,7 @@ createdirs() {
 
 zelconfig() {
   print_status "Creating the zel configuration."
-  echo -e \
-  "rpcuser=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
+  echo -e "rpcuser=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
 rpcpassword=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 rpcallowip=172.18.0.0/16
 rpcport=16124
@@ -128,8 +127,7 @@ maxconnections=256" | tee /mnt/zen/config/zelcash.conf
 
 zelcashdservice() {
   print_status "Installing zelcash service..."
-  echo -e \ 
-  "[Unit]
+  echo -e "[Unit]
 Description=ZeCash Daemon Container
 After=docker.service
 Requires=docker.service
@@ -159,10 +157,7 @@ zelalias() {
   fi
   
   if ! grep -q ". ~/.aliases" ~/.bashrc ; then
-    echo -e \
-    "if [ -f ~/.aliases ]; then
-      . ~/.aliases
-    fi" | tee -a ~/.bashrc
+    echo -e "if [ -f ~/.aliases ]; then . ~/.aliases; fi" | tee -a ~/.bashrc
   fi
 
   if ! grep -q "source $HOME/.aliases" ~/.zshrc ; then
