@@ -1,14 +1,12 @@
-# Docker Zencash Secure Node
+# Docker ZelCash ZelNode
 
-This repository will help you setup a zencash node with a single bash script.
+This repository will help you setup a zelcash node with a single bash script.
 
 The script will install Docker on a fresh Ubuntu VM and provision the following
 containers:
 
-- zend https://hub.docker.com/r/greerso/zend/
-- Securenodetracker https://hub.docker.com/r/greerso/secnodetracker/
+- zelcashd https://hub.docker.com/r/greerso/zelcashd/
 
-Certbot will be installed and auto-renew your SSL certificates when required.
 
 ## Requirements
 
