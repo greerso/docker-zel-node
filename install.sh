@@ -85,6 +85,7 @@ installdocker() {
     systemctl enable docker
     systemctl start docker
   fi
+  adduser $SUDO_USER docker
 }
 
 installdependencies() {
