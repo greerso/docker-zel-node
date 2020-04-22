@@ -16,7 +16,7 @@ RUN apt-get update \
         gosu \
     && echo 'deb https://apt.zel.cash/ all main' | tee --append /etc/apt/sources.list.d/zelcash.list \
     && gpg --keyserver keyserver.ubuntu.com --recv 4B69CA27A986265D \
-    && gpg --export 4B69CA27A986265D | sudo apt-key add - \
+    && gpg --export 4B69CA27A986265D | apt-key add - \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y install zelcash zelbench \
     && gosu nobody true
