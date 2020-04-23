@@ -154,24 +154,24 @@ startcontainers() {
 }
 
 zelalias() {
-  if ! grep -q "alias zelcash-cli" ~/.aliases ; then
-    echo -e "alias zelcash-cli=\"docker exec -it zelcashd /usr/local/bin/gosu user zelcash-cli\"" | tee -a ~/.aliases
+  if ! grep -q "alias zelcash-cli" $HOME/.aliases ; then
+    echo -e "alias zelcash-cli=\"docker exec -it zelcashd /usr/sbin/gosu user zelcash-cli\"" | tee -a $HOME/.aliases
   fi
   
-  if ! grep -q ". ~/.aliases" ~/.bashrc ; then
-    echo -e "if [ -f ~/.aliases ]; then . ~/.aliases; fi" | tee -a ~/.bashrc
+  if ! grep -q ". $HOME/.aliases" $HOME/.bashrc ; then
+    echo -e "if [ -f $HOME/.aliases ]; then . $HOME/.aliases; fi" | tee -a $HOME/.bashrc
   fi
 
-  if ! grep -q "source $HOME/.aliases" ~/.zshrc ; then
-    echo -e "source $HOME/.aliases" | tee -a ~/.zshrc
+  if ! grep -q "source $HOME/.aliases" $HOME/.zshrc ; then
+    echo -e "source $HOME/.aliases" | tee -a $HOME/.zshrc
   fi
 
-  source ~/.aliases
+  su $($SUDO_USER) -c 'source $HOME/.aliases'
 }
 
 fetchparams() {
   print_status "Waiting for node to fetch params ..."
-  until docker exec -it zelcashd /usr/local/bin/gosu user zelcash-cli getinfo
+  until docker exec -it zelcashd /usr/sbin/gosu user zelcash-cli getinfo
   do
     echo -e ".."
     sleep 30
