@@ -178,6 +178,17 @@ fetchparams() {
   done
 }
 
+insync() {
+  print_status "Syncing Blockchain"
+  progress=$(bc <<<"$(grep -oP "progress=\K\d.\d+" /mnt/zelcash/config/debug.log | tail -1)*100")
+  until [ ${progress%.*} -eq 99 ]
+  do
+    progress=$(bc <<<"$(grep -oP "progress=\K\d.\d+" /mnt/zelcash/config/debug.log | tail -1)*100")
+    echo -ne ${progress%.*}"%" \\r
+  done
+  print_status "Blockchain in sync!"
+}
+
 getbootstrap() {
   # Check for and download blockchain bootstrap
   if [ ! -d "/mnt/zelcash/config/blocks" ]; then
@@ -199,6 +210,8 @@ startcontainers
 fetchparams
 getbootstrap
 
+echo -e "Please wait until the blocks are up to date... (ctrl+c to sync in background)"
+
+insync
+
 print_status "Install Finished"
-echo -e "Please wait until the blocks are up to date..."
-## add check for blocks up to date
