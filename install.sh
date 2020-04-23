@@ -94,6 +94,7 @@ installdependencies() {
   unattended-upgrades \
   dnsutils \
   wget \
+  unzip \
   > /dev/null 2>&1
 }
 
