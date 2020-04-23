@@ -19,9 +19,9 @@ RUN apt-get update \
     && gpg --export 4B69CA27A986265D | apt-key add - \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y install zelcash zelbench \
-    && gosu nobody true
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
+    && gosu nobody true \
+    && apt-get clean
+    && rm -rf /var/lib/apt/lists/*
 
 # Default p2p communication port, can be changed via $OPTS (e.g. docker run -e OPTS="-port=16125")
 # or via a "port=16125" line in zen.conf.
