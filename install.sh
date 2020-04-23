@@ -180,10 +180,10 @@ fetchparams() {
 
 getbootstrap() {
   # Check for and download blockchain bootstrap
-  if [ ! -d "/mnt/zelcash/data/blocks" ]; then
+  if [ ! -d "/mnt/zelcash/config/blocks" ]; then
       echo "Downloading ZelCash Blockchain Bootstrap"
       $(wget https://zelcore.io/zelcashbootstraptxindex.zip)
-      $(unzip zelcashbootstraptxindex.zip -d /mnt/zelcash/data)
+      $(unzip zelcashbootstraptxindex.zip -d /mnt/zelcash/config)
       $(rm zelcashbootstraptxindex.zip)
   fi
 }
