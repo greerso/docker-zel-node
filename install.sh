@@ -179,11 +179,11 @@ fetchparams() {
 
 getbootstrap() {
   # Check for and download blockchain bootstrap
-  if [ ! -d "${HOME}/.komodo/blocks" ]; then
+  if [ ! -d "/mnt/zelcash/data/blocks" ]; then
       echo "Downloading ZelCash Blockchain Bootstrap"
       $(wget https://zelcore.io/zelcashbootstraptxindex.zip)
-      $(unzip zel-bootstrap.zip -d /mnt/zelcash/data)
-      $(rm zel-bootstrap.zip)
+      $(unzip zelcashbootstraptxindex.zip -d /mnt/zelcash/data)
+      $(rm zelcashbootstraptxindex.zip)
   fi
 }
 
