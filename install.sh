@@ -9,12 +9,12 @@ print_status() {
 }
 
 if [ $# -lt 3 ]; then
-    echo -e "Execution format ./install.sh zelnode_pubkey collateral_txid tx_output_index nodetype"
+    echo -e "Execution format ./install.sh zelnode_privkey collateral_txid tx_output_index nodetype"
     exit
 fi
 
 # Installation variables
-zelnode_pubkey=${1}
+zelnode_privkey=${1}
 collateral_txid=${2}
 tx_output_index=${3}
 externalip=$(dig +short myip.opendns.com @resolver1.opendns.com)
@@ -28,7 +28,7 @@ fi
 print_status "Installing the ZelCash node..."
 
 echo -e "#########################"
-echo -e "zelnode_pubkey: $zelnode_pubkey"
+echo -e "zelnode_privkey: $zelnode_privkey"
 echo -e "collateral_txid: $collateral_txid"
 echo -e "tx_output_index: $tx_output_index"
 echo -e "#########################"
@@ -110,7 +110,7 @@ rpcallowip=172.18.0.0/16
 rpcport=16124
 port=16125
 zelnode=1
-zelnodeprivkey=${zelnode_pubkey}
+zelnodeprivkey=${zelnode_privkey}
 zelnodeoutpoint=${collateral_txid}
 zelnodeindex=${tx_output_index}
 server=1
